@@ -13,8 +13,10 @@ This repository provides an tensorflow implementation of a submitted paper:
 ## Datasets
 To download Sleep-EDF database
 * https://physionet.org/content/sleep-edf/1.0.0/
+
 To download KU-MI database
 * http://gigadb.org/dataset/100542/
+
 To download TUH abnormal corpus database
-* https://isip.piconepress.com/projects/tuh eeg/
+* https://isip.piconepress.com/projects/tuh_eeg/
 
