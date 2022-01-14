@@ -107,13 +107,18 @@ class C(tf.keras.Model):
     def __init__(self, No):
         super(C, self).__init__()
         # Define layer
-        self.C = tf.keras.Sequential(
-            [
-                layers.InputLayer(input_shape=(120,)),
-                layers.Dense(units=No, activation=None, kernel_regularizer='L1L2'),
-            ]
-        )
+        def classifier():
+            func = tf.keras.Sequential(
+                [
+                    layers.InputLayer(input_shape=(120,)),
+                    layers.Dense(units=No, activation=None, kernel_regularizer='L1L2'),
+                ]
+            )
+            return func
+
+        # The number of clusters is 4.
+        self.C = [classifier(), classifier(), classifier(), classifier()]
 
     @tf.function
-    def classification(self, f_ALN):
-        return self.C(tf.squeeze(f_ALN))
+    def classification(self, cluster, f_ALN):
+        return self.C[cluster](f_ALN)
