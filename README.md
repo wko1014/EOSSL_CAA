@@ -20,3 +20,5 @@ To download KU-MI database
 To download TUH abnormal corpus database
 * https://isip.piconepress.com/projects/tuh_eeg/
 
+## Usage
+`network.py` contains the proposed deep learning architectures, `utils.py` contains functions used for experimental procedures, and `experiment.py` contains the main experimental functions.
