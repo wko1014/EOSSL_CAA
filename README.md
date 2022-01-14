@@ -8,7 +8,7 @@ This repository provides a tensorflow implementation of a submitted paper:
 
 ## Dependencies
 * [Python 3.8+](https://www.continuum.io/downloads)
-* [TensorFlow 2.7.0+](https://www.tensorflow.org/) (optional for tensorboard)
+* [TensorFlow 2.7.0+](https://www.tensorflow.org/)
 
 ## Datasets
 To download Sleep-EDF database
