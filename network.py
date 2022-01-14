@@ -92,13 +92,14 @@ class ALN(tf.keras.Model):
     """
     @tf.function
     def statistics(self, f1, f2):
-        mu = tf.concat((tf.math.reduce_mean(f1, -2), tf.math.reduce_mean(f2, -2)), -1)
-        f_concat = mu # Similar to GAP on the temporal dimension!
-        sigma = tf.concat((tf.math.reduce_std(f1, -2), tf.math.reduce_std(f2, -2)), -1)
-        return mu, sigma
+        mu = tf.squeeze(tf.concat((tf.math.reduce_mean(f1, -2), tf.math.reduce_mean(f2, -2)), -1))
+        sigma = tf.squeeze(tf.concat((tf.math.reduce_std(f1, -2), tf.math.reduce_std(f2, -2)), -1))
+        # similar to GAP on the temporal dimension
+        f_concat = mu
+        return mu, sigma, f_concat
 
-    def normalization(self, mu_star, sigma_star):
-        return (self.f_concat - mu_star)/sigma_star
+    def normalization(self, f_concat, mu_star, sigma_star):
+        return (f_concat - mu_star)/sigma_star
 
 class C(tf.keras.Model):
     """
@@ -106,12 +107,13 @@ class C(tf.keras.Model):
     """
     def __init__(self, No):
         super(C, self).__init__()
+        self.No = No
         # Define layer
         def classifier():
             func = tf.keras.Sequential(
                 [
                     layers.InputLayer(input_shape=(120,)),
-                    layers.Dense(units=No, activation=None, kernel_regularizer='L1L2'),
+                    layers.Dense(units=self.No, activation=None, kernel_regularizer='L1L2'),
                 ]
             )
             return func
@@ -122,3 +124,24 @@ class C(tf.keras.Model):
     @tf.function
     def classification(self, cluster, f_ALN):
         return self.C[cluster](f_ALN)
+
+x = np.random.random((5, 62, 300, 1))
+e1 = E1(100, 62, 300)
+e2 = E2(62, 300)
+aln = ALN()
+c = C(2)
+
+f1 = e1.spectral_embedding(x)
+f2 = e2.temporal_embedding(x)
+
+print(f1.shape, f2.shape)
+mu, sigma, f = aln.statistics(f1, f2)
+print(mu.shape, sigma.shape, f.shape)
+
+f = aln.normalization(f, mu, sigma)
+print(f.shape)
+
+print([0, 0, 1, 3, 2][3])
+y = c.classification([0, 0, 1, 3, 2], f)
+
+print(y.shape)
