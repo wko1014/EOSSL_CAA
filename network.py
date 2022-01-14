@@ -90,14 +90,12 @@ class ALN(tf.keras.Model):
     """
     The adaptive layer normalization
     """
-    def __init__(self, f1, f2):
-        self.mu = tf.concat((tf.math.reduce_mean(f1, -2), tf.math.reduce_mean(f2, -2)), -1)
-        self.f_concat = self.mu # Similar to GAP on the temporal dimension!
-        self.sigma = tf.concat((tf.math.reduce_std(f1, -2), tf.math.reduce_std(f2, -2)), -1)
-
     @tf.function
-    def statistics(self):
-        return self.mu, self.sigma
+    def statistics(self, f1, f2):
+        mu = tf.concat((tf.math.reduce_mean(f1, -2), tf.math.reduce_mean(f2, -2)), -1)
+        f_concat = mu # Similar to GAP on the temporal dimension!
+        sigma = tf.concat((tf.math.reduce_std(f1, -2), tf.math.reduce_std(f2, -2)), -1)
+        return mu, sigma
 
     def normalization(self, mu_star, sigma_star):
         return (self.f_concat - mu_star)/sigma_star

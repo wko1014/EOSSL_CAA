@@ -2,29 +2,24 @@ import numpy as np
 from mne.filter import filter_data
 
 """
-EEG sample has to have [Ns, Nc, Nt, 1] form 
+EEG sample has to have [subjects index, Ns, Nc, Nt, 1] form 
 where Ns, Nc, and Nt are the number of trials, electrodes, and timepoints.
 Label has to have [Ns, No] form where No is the number of possible classes.
 """
 
-def load_D_MI(subject, fold, num_training_samples=None):
+def load_D_MI(test_sbj):
     # Load motor imagery EEGs
     path = 'define/your/own/path/'
-    X = np.load(path + f'data_sbj{subject:02d}.npy')
-    Y = np.load(path + f'label_sbj{subject:02d}.npy')
+    X = np.load(path + 'data.npy')
+    Y = np.load(path + 'label.npy')
 
-    # Randomize samples
-    rand_idx = np.random.RandomState(seed=42).permutation(X.shape[0])
-    num_tests = int(X.shape[0]/5) # 5-fold cross-validation, num_trains = 280
+    D_test = (X[test_sbj, ...], Y[test_sbj, ...])
+    X_train = np.delete(X, test_sbj, 0)
+    Y_train = np.delete(Y, test_sbj, 0)
 
-    if num_training_samples is None:
-        num_training_samples = X.shape[0] - num_tests
-
-    test_idx = rand_idx[num_tests * (fold - 1):num_tests * fold]
-    train_idx = np.setdiff1d(rand_idx, test_idx)
-
-    D_train = (X[train_idx, ...][:num_training_samples, ...], Y[train_idx, ...][:num_training_samples, ...])
-    D_test = (X[test_idx, ...], Y[test_idx, ...])
+    X_train = np.reshape(X_train, newshape=(-1, X_train.shape[-3], X_train.shape[-2], X_train.shape[-1]))
+    Y_train = np.reshape(Y_train, newshape=(-1, Y_train.shape[-1]))
+    D_train = (X_train, Y_train)
     return D_train, D_test
 
 def make_D_prime_MI(D_train):
