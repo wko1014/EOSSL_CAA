@@ -23,4 +23,4 @@ To download TUH abnormal corpus database
 `network.py` contains the proposed deep learning architectures, `utils.py` contains functions used for experimental procedures, and `main.py` contains the main experimental functions.
 
 ## Acknowledgements
-Anonymous
+Anonymous institute
