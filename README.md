@@ -1,5 +1,5 @@
 # EEG-Oriented Self-Supervised Learning and Cluster-Aware Adaptation
-<p align="center"><img width="80%" src="files/framework.png" /></p>
+<p align="center"><img width="100%" src="files/framework.png" /></p>
 
 This repository provides a tensorflow implementation of a submitted paper:
 > **EEG-Oriented Self-Supervised Learning and Cluster-Aware Adaptation**<br>
