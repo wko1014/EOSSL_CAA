@@ -124,24 +124,3 @@ class C(tf.keras.Model):
     @tf.function
     def classification(self, cluster, f_ALN):
         return self.C[cluster](f_ALN)
-
-x = np.random.random((5, 62, 300, 1))
-e1 = E1(100, 62, 300)
-e2 = E2(62, 300)
-aln = ALN()
-c = C(2)
-
-f1 = e1.spectral_embedding(x)
-f2 = e2.temporal_embedding(x)
-
-print(f1.shape, f2.shape)
-mu, sigma, f = aln.statistics(f1, f2)
-print(mu.shape, sigma.shape, f.shape)
-
-f = aln.normalization(f, mu, sigma)
-print(f.shape)
-
-print([0, 0, 1, 3, 2][3])
-y = c.classification([0, 0, 1, 3, 2], f)
-
-print(y.shape)
