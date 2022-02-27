@@ -60,7 +60,7 @@ def make_D_prime_MI(D_train):
         data=X[3 * int(num_samples/5):4 * int(num_samples/5), ...], sfreq=100, l_freq=30, h_freq=15, verbose=False
     )
 
-    # gamma range
+    # gamma range (30 ~ 59 Hz)
     X[4 * int(num_samples/5):, ...] = filter_data(
         data=X[4 * int(num_samples/5):, ...], sfreq=100, l_freq=59, h_freq=30, verbose=False
     )
