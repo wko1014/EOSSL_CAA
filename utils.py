@@ -31,6 +31,7 @@ def make_D_prime_MI(D_train):
     X = np.squeeze(D_train[0])
     X = np.reshape(X, newshape=(-1, X.shape[-1]))
     rand_idx = np.random.RandomState(seed=42).permutation(X.shape[0])
+    
     # Randomize single-channel training samples and randomly select 1000 samples
     num_samples = 1000
     X = X[rand_idx[: num_samples], ...]
