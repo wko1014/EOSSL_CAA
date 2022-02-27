@@ -86,6 +86,7 @@ def make_D_double_prime_MI(D_train):
     X = np.squeeze(D_train[0])
     X = np.reshape(X, newshape=(-1, X.shape[-1]))
     rand_idx = np.random.RandomState(seed=24).permutation(X.shape[0])
+    
     # Randomize single-channel training samples and randomly select 1000 samples
     num_samples = 1000
     X = X[rand_idx[: num_samples], ...]
@@ -116,6 +117,7 @@ def make_D_double_prime_MI(D_train):
     # adding
     X[4 * int(num_samples / 8):5 * int(num_samples / 8), ...] = trend(
         X[4 * int(num_samples / 8):5 * int(num_samples / 8), ...])
+    
     # subtracting
     X[5 * int(num_samples / 8):6 * int(num_samples / 8), ...] = trend(
         X[5 * int(num_samples / 8):6 * int(num_samples / 8), ...], False)
@@ -132,6 +134,7 @@ def make_D_double_prime_MI(D_train):
 
     # Make label
     Y = np.reshape(np.tile(np.array([0, 1, 2, 3]), (int(num_samples/4), 1)).T, (-1))
+    
     # One-hot encoding
     Y = np.eye(np.unique(Y).shape[0])[Y]
 
