@@ -45,7 +45,7 @@ def make_D_prime_MI(D_train):
         data=X[:int(num_samples/5), ...], sfreq=100, l_freq=4, h_freq=.5, verbose=False
     )
 
-    # theta range
+    # theta range (4 ~ 8 Hz)
     X[int(num_samples/5):2 * int(num_samples/5), ...] = filter_data(
         data=X[int(num_samples/5):2 * int(num_samples/5), ...], sfreq=100, l_freq=8, h_freq=4, verbose=False
     )
