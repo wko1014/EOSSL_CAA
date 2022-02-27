@@ -40,7 +40,7 @@ def make_D_prime_MI(D_train):
     X = X[..., 128:]
 
     # Band-stop filtering
-    # delta range
+    # delta range (0.5~4 Hz)
     X[:int(num_samples/5), ...] = filter_data(
         data=X[:int(num_samples/5), ...], sfreq=100, l_freq=4, h_freq=.5, verbose=False
     )
