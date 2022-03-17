@@ -91,6 +91,7 @@ class E2(tf.keras.Model):
 class ALN(tf.keras.Model):
     """
     The adaptive layer normalization
+    Control EEG feature variability
     """
     @tf.function
     def statistics(self, f1, f2):
