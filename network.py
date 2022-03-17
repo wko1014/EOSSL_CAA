@@ -6,6 +6,7 @@ from tensorflow.keras import layers
 class E1(tf.keras.Model):
     """
     The spatio-spectro characteristics representer
+    Pretrained via stopped band prediction pretext task
     """
     def __init__(self, Fs, Nc, Nt):
         super(E1, self).__init__()
