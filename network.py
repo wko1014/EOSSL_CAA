@@ -107,6 +107,7 @@ class ALN(tf.keras.Model):
 class C(tf.keras.Model):
     """
     The classifier
+    Adaptively exploited for the decision-making
     """
     def __init__(self, No):
         super(C, self).__init__()
