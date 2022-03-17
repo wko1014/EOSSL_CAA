@@ -50,6 +50,7 @@ class E1(tf.keras.Model):
 class E2(tf.keras.Model):
     """
     The spatio-temporal dynamics representer
+    Pretrained via temporal trend identification pretext task
     """
     def __init__(self, Nc, Nt):
         super(E2, self).__init__()
