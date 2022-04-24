@@ -12,7 +12,7 @@ print("Num GPUs Available: ", len(tf.config.experimental.list_physical_devices('
 class experiment():
     def __init__(self, test_sbj, Nk=4):
         self.test_sbj = test_sbj
-        self.Fs = 100
+        self.Fs = 100 # sampling frequency
 
         # K-Means++ Buffer
         self.kmeans = KMeans(n_clusters=Nk, init='k-means++')
