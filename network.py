@@ -97,7 +97,7 @@ class ALN(tf.keras.Model):
     def statistics(self, f1, f2):
         mu = tf.squeeze(tf.concat((tf.math.reduce_mean(f1, -2), tf.math.reduce_mean(f2, -2)), -1))
         sigma = tf.squeeze(tf.concat((tf.math.reduce_std(f1, -2), tf.math.reduce_std(f2, -2)), -1))
-        # similar to GAP on the temporal dimension
+        # similar to global average pooling on the temporal dimension
         f_concat = mu
         return mu, sigma, f_concat
 
