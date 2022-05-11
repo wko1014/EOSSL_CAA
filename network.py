@@ -42,7 +42,7 @@ class E1(tf.keras.Model):
     def spectral_embedding(self, x):
         return self.E1(x)
 
-    def band_prediction(self, f):
+    def band_prediction(self, f): # for the stopped band prediction pretext task
         f = tf.math.reduce_mean(f, axis=-2) # Global average pooling into temporal dimension
         f = tf.squeeze(f)
         return self.C1(f)
