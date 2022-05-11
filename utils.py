@@ -1,6 +1,6 @@
 # Import APIs
 import numpy as np
-from mne.filter import filter_data
+from mne.filter import filter_data # for band-pass filtering
 
 """
 EEG sample has to have [subjects index, Ns, Nc, Nt, 1] form 
