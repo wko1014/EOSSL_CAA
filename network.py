@@ -83,7 +83,7 @@ class E2(tf.keras.Model):
     def temporal_embedding(self, x):
         return self.E2(x)
 
-    def stationary_detection(self, f):
+    def stationary_detection(self, f): # for the temporal trend identification pretext task
         f = tf.math.reduce_mean(f, axis=-2) # Global average pooling into temporal dimension
         f = tf.squeeze(f)
         return self.C2(f)
