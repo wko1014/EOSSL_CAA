@@ -133,7 +133,3 @@ class experiment():
                          var_e2[10], var_e2[11], var_c]
                 grad = tape.gradient(L, theta)
                 self.opt.apply_gradients(zip(grad, theta))
-
-
-
-
