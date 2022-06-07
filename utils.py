@@ -117,6 +117,7 @@ def make_D_double_prime_MI(D_train):
             for nc in range(x.shape[1]):
                 x[ns, nc] += tmp * (np.random.random(1) * np.linspace(0, 10, x.shape[-1]) - 5)
         return np.expand_dims(x, -1) # to recover the final dimension
+    
     # adding
     X[4 * int(num_samples / 8):5 * int(num_samples / 8), ...] = trend(
         X[4 * int(num_samples / 8):5 * int(num_samples / 8), ...])
