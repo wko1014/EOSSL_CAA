@@ -98,7 +98,6 @@ class experiment():
 
         tmp = int(D_train[1].shape[0]/self.N_batches)
 
-
         for iteration in range(self.N_iters):
             # randomization
             rand_idx = D_train[0].shape[0]
