@@ -1,5 +1,6 @@
 # Import APIs
 import numpy as np
+
 from mne.filter import filter_data # for band-pass filtering
 
 """
